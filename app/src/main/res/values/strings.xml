@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SVL Food Order Management</string>
+    <string name="title_activity_table_order">TableOrder</string>
+</resources>
