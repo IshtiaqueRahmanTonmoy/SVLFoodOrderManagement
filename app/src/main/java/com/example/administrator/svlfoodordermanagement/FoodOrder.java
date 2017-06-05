@@ -160,7 +160,6 @@ public class FoodOrder extends AppCompatActivity {
             sys.getFoods().clear();
             String carListAsString = intent.getStringExtra("listget");
 
-
             Gson gson = new Gson();
             Type type = new TypeToken<List<Foods>>(){}.getType();
             cartList = gson.fromJson(carListAsString, type);
@@ -194,8 +193,6 @@ public class FoodOrder extends AppCompatActivity {
 
         // Update LayerDrawable's BadgeDrawable
         Utils.setBadgeCount(this, icon, mNotificationsCount);
-
-
         return true;
     }
 

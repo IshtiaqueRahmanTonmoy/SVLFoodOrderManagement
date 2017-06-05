@@ -24,7 +24,7 @@ public class ConnectionClass {
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
             // Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//.newInstance();
-            String connString = "jdbc:jtds:sqlserver://192.168.0.121/ASSDB;user=sa;password=sa@123;instance=MSSQLSERVER;";
+            String connString = "jdbc:jtds:sqlserver://192.168.56.1/ASSDB;user=sa;password=sa@123;instance=SQLEXPRESS;";
             //String connString = "jdbc:odbc:connection_DSN";
             conn = DriverManager.getConnection(connString);
             Log.d("SUCCESS", "Connection successful ");

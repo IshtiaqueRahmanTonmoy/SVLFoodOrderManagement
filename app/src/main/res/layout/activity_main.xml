@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
         android:orientation="vertical">
 
         <TextView
@@ -62,15 +62,17 @@
 
         </android.support.design.widget.TextInputLayout>
 
+
         <Button
             android:id="@+id/btn"
             style="@style/MyButton"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="18dp"
             android:textColor="#faf7f7"
             android:layout_width="match_parent"
             android:background="@drawable/button_backgroundlogin"
             android:layout_height="wrap_content"
             android:text="Submit"/>
+
 
     </LinearLayout>
 

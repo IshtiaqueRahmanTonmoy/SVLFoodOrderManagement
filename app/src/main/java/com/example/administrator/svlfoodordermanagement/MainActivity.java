@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     String userid,uPassword;
     Intent i;
     String value;
+    private JSONParser jParser=new JSONParser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
         userid = edtuserid.getText().toString();
         uPassword = editpass.getText().toString();
-        //Intent i = new Intent(MainActivity.this, TableOrder.class);
-        //startActivity(i);
-        UserLoginTask userLoginTask= new UserLoginTask(userid, uPassword);
-        userLoginTask.execute("", null);
+
+
+        Intent i = new Intent(MainActivity.this, TableOrder.class);
+        startActivity(i);
+
+        //UserLoginTask userLoginTask= new UserLoginTask(userid, uPassword);
+        //userLoginTask.execute("", null);
     }
     public class UserLoginTask extends AsyncTask<String,String,String > {
 
