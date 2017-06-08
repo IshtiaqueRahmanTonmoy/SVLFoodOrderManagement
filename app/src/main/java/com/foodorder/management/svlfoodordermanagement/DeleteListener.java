@@ -1,4 +1,4 @@
-package com.example.administrator.svlfoodordermanagement;
+package com.foodorder.management.svlfoodordermanagement;
 
 /**
  * Created by Administrator on 11/8/2016.

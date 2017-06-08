@@ -1,18 +1,13 @@
-package com.example.administrator.svlfoodordermanagement;
+package com.foodorder.management.svlfoodordermanagement;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +18,8 @@ import java.util.List;
 public class FoodListCustomView extends BaseAdapter {
 
     Context context;
-    List<Foods> list;
+    List<Foods> list = null;
+    private ArrayList<Foods> arraylist;
     SystemClass sys;
     //CartSavingSqlite sqlit
     Foods value;
@@ -41,6 +37,8 @@ public class FoodListCustomView extends BaseAdapter {
         this.list = list;
         foods = new ArrayList<Foods>();
         sys = new SystemClass();
+        this.arraylist = new ArrayList<Foods>();
+        this.arraylist.addAll(list);
     }
     @Override
     public int getCount() {
@@ -92,6 +90,7 @@ public class FoodListCustomView extends BaseAdapter {
 
         return convertView;
     }
+
 
     private static class ViewHolder {
         public TextView foodname,foodid,foodrate,quantity;

@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:padding="1px"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textColor="#ffffff"
         android:text="Choose table for order..."
         android:layout_width="fill_parent" />

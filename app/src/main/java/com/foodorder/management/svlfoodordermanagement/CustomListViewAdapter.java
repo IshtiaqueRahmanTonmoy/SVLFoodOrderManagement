@@ -1,4 +1,4 @@
-package com.example.administrator.svlfoodordermanagement;
+package com.foodorder.management.svlfoodordermanagement;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,12 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 10/27/2016.
@@ -22,15 +23,34 @@ public class CustomListViewAdapter extends ArrayAdapter<Foods> {
     ViewHolder holder = null;
     static HashMap<String, String> map = new HashMap<>();
     View row = null;
-    List<Foods> items;
+    List<Foods> list = null;
+    private ArrayList<Foods> arraylist = new ArrayList<Foods>();
     //HashMap<String,Integers> positiveNumbers = new HashMap<String,Integers>();
     Integer count=0;
 
     public CustomListViewAdapter(Context context, int resourceId,
-                                 List<Foods> items) {
-        super(context, resourceId, items);
+                                 List<Foods> list) {
+        super(context, resourceId, list);
         this.context = context;
-        this.items = items;
+        this.list = list;
+        this.arraylist = new ArrayList<Foods>();
+        this.arraylist.addAll(list);
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        list.clear();
+        if (charText.length() == 0) {
+            list.addAll(arraylist);
+        } else {
+            for (Foods wp : arraylist) {
+                if (wp.getFoodname().toLowerCase(Locale.getDefault())
+                        .contains(charText)) {
+                    list.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     /*private view holder class*/
@@ -44,11 +64,11 @@ public class CustomListViewAdapter extends ArrayAdapter<Foods> {
 
     @Override
     public int getCount() {
-        return items.size();
+        return list.size();
     }
     @Override
     public Foods getItem(int position) {
-        return items.get(position);
+        return list.get(position);
     }
     @Override
     public long getItemId(int position) {

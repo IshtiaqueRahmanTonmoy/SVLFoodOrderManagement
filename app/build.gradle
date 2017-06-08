@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.example.administrator.svlfoodordermanagement"
+        applicationId "com.foodorder.management.svlfoodordermanagement"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1

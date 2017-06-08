@@ -1,4 +1,4 @@
-package com.example.administrator.svlfoodordermanagement;
+package com.foodorder.management.svlfoodordermanagement;
 
 import android.annotation.SuppressLint;
 import android.os.StrictMode;

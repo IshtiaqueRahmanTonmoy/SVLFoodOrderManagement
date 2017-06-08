@@ -1,6 +1,4 @@
-package com.example.administrator.svlfoodordermanagement;
-
-import android.util.Log;
+package com.foodorder.management.svlfoodordermanagement;
 
 import java.util.ArrayList;
 import java.util.List;

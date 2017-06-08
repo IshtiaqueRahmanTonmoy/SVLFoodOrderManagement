@@ -1,31 +1,41 @@
-package com.example.administrator.svlfoodordermanagement;
+package com.foodorder.management.svlfoodordermanagement;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-public class MainActivity extends AppCompatActivity {
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edtuserid,editpass;
     Button btnlogin;
     //ProgressBar pbbar;
-    String userid,uPassword;
+    String LoginID,UserPassword;
     Intent i;
     String value;
+    Context context;
     private JSONParser jParser=new JSONParser();
 
     @Override
@@ -35,19 +45,29 @@ public class MainActivity extends AppCompatActivity {
 
         edtuserid = (EditText) findViewById(R.id.email);
         editpass = (EditText) findViewById(R.id.password);
-        btnlogin = (Button) findViewById(R.id.btn);
+        btnlogin = (AppCompatButton) findViewById(R.id.btn);
 
+        btnlogin.setOnClickListener(this);
+
+        /*
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptLogin();
             }
         });
+        */
     }
+
+    public void rl_main_onClick(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
     private void attemptLogin() {
 
-        userid = edtuserid.getText().toString();
-        uPassword = editpass.getText().toString();
+        LoginID = edtuserid.getText().toString();
+        UserPassword = editpass.getText().toString();
 
 
         Intent i = new Intent(MainActivity.this, TableOrder.class);
@@ -55,6 +75,69 @@ public class MainActivity extends AppCompatActivity {
 
         //UserLoginTask userLoginTask= new UserLoginTask(userid, uPassword);
         //userLoginTask.execute("", null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        login();
+
+    }
+
+    private void login() {
+        LoginID = edtuserid.getText().toString();
+        UserPassword = editpass.getText().toString();
+
+
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //If we are getting success from server
+                        if (response.equalsIgnoreCase(Config.LOGIN_SUCCESS)) {
+                            //Creating a shared preference
+                            SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+                            //Creating editor to store values to shared preferences
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            //Adding values to editor
+                            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
+                            editor.putString(Config.EMAIL_SHARED_PREF, LoginID);
+
+                            //Saving values to editor
+                            editor.commit();
+
+                            //Starting profile activity
+                            Intent intent = new Intent(MainActivity.this, TableOrder.class);
+                            startActivity(intent);
+                        } else {
+                            //If the server response is not success
+                            //Displaying an error message on toast
+                            Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put(Config.KEY_EMAIL, LoginID);
+                params.put(Config.KEY_PASSWORD, UserPassword);
+
+                //returning parameter
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
     public class UserLoginTask extends AsyncTask<String,String,String > {
 
