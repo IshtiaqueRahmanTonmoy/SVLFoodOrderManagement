@@ -159,8 +159,8 @@ public class TableList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(TableList.this,stock+" "+quantity+""+id+""+name ,Toast.LENGTH_SHORT).show();
-                Toast.makeText(TableList.this, "Your Selected Foods Has Been Ordered", Toast.LENGTH_SHORT).show();
-                /*
+                //Toast.makeText(TableList.this, "Your Selected Foods Has Been Ordered", Toast.LENGTH_SHORT).show();
+
                 for(Foods s : lists){
                     String id = s.getFoodid().toString();
                     String name = s.getFoodname().toString();
@@ -172,10 +172,11 @@ public class TableList extends AppCompatActivity {
 
                     //Insertdata insert = new Insertdata(id,name,price,qtys,tot);
                     //insert.execute("",null);
+                    Toast.makeText(TableList.this, ""+lists.size(), Toast.LENGTH_SHORT).show();
                     Inserttable(id,name,price,qtys,tot);
                     Log.d("idval",id);
                 }
-              */
+
             }
         });
     }

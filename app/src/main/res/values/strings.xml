@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">Restaurant Management Systemt</string>
+    <string name="app_name">Restaurant Management System</string>
     <string name="title_activity_table_order">TableOrder</string>
+    <string name="next">Login</string>
+
+    <string name="title">Restaurant Management System</string>
+    <string name="author_name">By Ingenious Techonologies</string>
+    <string name="author_url">http://ingtechbd.com/</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="btn_join">LOGIN</string>
+    <string name="btn_send">Send</string>
 </resources>

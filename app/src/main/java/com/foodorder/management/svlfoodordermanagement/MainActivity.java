@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         edtuserid = (EditText) findViewById(R.id.email);
-        editpass = (EditText) findViewById(R.id.password);
-        btnlogin = (AppCompatButton) findViewById(R.id.btn);
+        //editpass = (EditText) findViewById(R.id.password);
+        btnlogin = (Button) findViewById(R.id.btnJoin);
 
         btnlogin.setOnClickListener(this);
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void login() {
         LoginID = edtuserid.getText().toString();
-        UserPassword = editpass.getText().toString();
+       // UserPassword = editpass.getText().toString();
 
 
         //Creating a string request
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             //If the server response is not success
                             //Displaying an error message on toast
-                            Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Invalid mail address..", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<>();
                 //Adding parameters to request
                 params.put(Config.KEY_EMAIL, LoginID);
-                params.put(Config.KEY_PASSWORD, UserPassword);
+                //params.put(Config.KEY_PASSWORD, UserPassword);
 
                 //returning parameter
                 return params;
